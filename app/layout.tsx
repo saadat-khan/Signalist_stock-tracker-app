@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "EquiTrack",
+  title: "Signalist",
   description: "Stay ahead in the market with real-time stock tracking, personalized alerts, and in-depth company insights tailored to your portfolio.",
 };
 
