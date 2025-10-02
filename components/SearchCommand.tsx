@@ -15,7 +15,28 @@ import Link from "next/link";
 import {searchStocks} from "@/lib/actions/finnhub.actions";
 import {useDebounce} from "@/hooks/useDebounce";
 
-export default function SearchCommand({ renderAs = 'button', label = "Add stock", initialStocks }: SearchCommandProps) {
+"use client";
+
+import {useState, useEffect, useCallback} from "react";
+import type { StockWithWatchlistStatus } from "@/lib/actions/finnhub.actions";
+import {
+  CommandDialog,
+  CommandInput,
+  // …other imports
+} from "your-command-library";
+import {useDebounce} from "@/hooks/useDebounce";
+
+interface SearchCommandProps {
+  renderAs?: 'button' | 'text';
+  label?: string;
+  initialStocks: StockWithWatchlistStatus[];
+}
+
+export default function SearchCommand(
+  { renderAs = 'button', label = "Add stock", initialStocks }: SearchCommandProps
+) {
+  // …component implementation
+}
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
