@@ -12,18 +12,6 @@ import {
 import { Button } from "./ui/button";
 import {Loader, Loader2, TrendingUp} from "lucide-react";
 import Link from "next/link";
-import {searchStocks} from "@/lib/actions/finnhub.actions";
-import {useDebounce} from "@/hooks/useDebounce";
-
-"use client";
-
-import {useState, useEffect, useCallback} from "react";
-import type { StockWithWatchlistStatus } from "@/lib/actions/finnhub.actions";
-import {
-  CommandDialog,
-  CommandInput,
-  // …other imports
-} from "your-command-library";
 import {useDebounce} from "@/hooks/useDebounce";
 
 interface SearchCommandProps {
@@ -35,8 +23,6 @@ interface SearchCommandProps {
 export default function SearchCommand(
   { renderAs = 'button', label = "Add stock", initialStocks }: SearchCommandProps
 ) {
-  // …component implementation
-}
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
@@ -58,26 +44,29 @@ export default function SearchCommand(
   }, []);
 
   const handleSearch = async () => {
-      if(!isSearchMode) return setStocks(initialStocks);
+    if (!isSearchMode) return setStocks(initialStocks);
 
-      setLoading(true);
-      try {
-          const results= await searchStocks(searchTerm.trim());
-          setStocks(results);
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/search?q=${encodeURIComponent(searchTerm.trim())}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch search results');
       }
-      catch {
-          setStocks([])
-      }
-      finally {
-          setLoading(false);
-      }
-  }
+      const data = await response.json();
+      setStocks(data.results || []);
+    } catch (error) {
+      console.error('Search error:', error);
+      setStocks([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const debouncedSearch = useDebounce(handleSearch, 300);
 
-    useEffect(() => {
-        debouncedSearch();
-    }, [searchTerm]);
+  useEffect(() => {
+    debouncedSearch();
+  }, [searchTerm, debouncedSearch]);
 
   const handleSelectStock = () => {
     setOpen(false);
@@ -87,69 +76,59 @@ export default function SearchCommand(
 
   return (
     <>
-        {renderAs === "text" ? (
-            <span onClick={() => setOpen(true)} className="search-text">
-                {label}
-            </span>
-        ):(
-            <Button onClick={() => setOpen(true)} className="search-btn">
-                {label}
-            </Button>
-        )}
-        <CommandDialog open={open} onOpenChange={setOpen} className="search-dialogue">
-            <div className="search-field">
-                <CommandInput
-                placeholder="Search stocks..."
-                value={searchTerm}
-                onValueChange={setSearchTerm}
-                className="search-input"
-                />
-                {loading && <Loader2 className="search-loader"/>}
+      {renderAs === "text" ? (
+        <span onClick={() => setOpen(true)} className="search-text">
+          {label}
+        </span>
+      ) : (
+        <Button onClick={() => setOpen(true)} className="search-btn">
+          {label}
+        </Button>
+      )}
+      <CommandDialog open={open} onOpenChange={setOpen} className="search-dialogue">
+        <div className="search-field">
+          <CommandInput
+            placeholder="Search stocks..."
+            value={searchTerm}
+            onValueChange={setSearchTerm}
+            className="search-input"
+          />
+          {loading && <Loader2 className="search-loader"/>}
+        </div>
+        <CommandList className="search-list">
+          {loading ? (
+            <CommandEmpty className="search-list-empty">Loading stocks...</CommandEmpty>
+          ) : displayStocks?.length === 0 ? (
+            <div className="search-list-indicator">
+              {isSearchMode ? "No results found" : "No stocks found."}
             </div>
-            <CommandList className="search-list">
-                {loading ? (
-                    <CommandEmpty className="search-list-empty">Loading stocks...</CommandEmpty>
-                ) : displayStocks?.length === 0 ? (
-                    <div className="search-list-indicator">
-                        {isSearchMode ? "No results found" : "No stocks found."}
+          ) : (
+            <ul>
+              <div className="search-count">
+                {isSearchMode ? "Search results" : "Popular stocks"}
+                {` `}({displayStocks?.length || 0})
+              </div>
+              {displayStocks?.map((stock, i) => (
+                <li key={stock.symbol} className="search-item">
+                  <Link
+                    href={`/stocks/${stock.symbol}`}
+                    onClick={handleSelectStock}
+                    className="search-item-link"
+                  >
+                    <TrendingUp className="h-4 w-4 text-gray-500" />
+                    <div className="flex-1">
+                      {stock.name}
                     </div>
-                ) : (
-                        <ul>
-                            <div className="search-count">
-                                {isSearchMode ? "Search results" : "Popular stocks"}
-                                {` `}({displayStocks?.length || 0})
-                            </div>
-                            {displayStocks?.map((stock, i) => (
-                                <li key={stock.symbol} className="search-item">
-                                    <Link
-                                        href={`/stocks/${stock.symbol}`}
-                                        onClick={handleSelectStock}
-                                     <Link
-                                         href={`/stocks/${stock.symbol}`}
-                                         onClick={handleSelectStock}
-                                         className="search-item-link"
-                                     >
-                                    >
-                                        <TrendingUp className="h-4 w-4 text-gray-500" />
-                                        <div className="flex-1">
-                                            {stock.name}
-                                        </div>
-                                        <div className="text-sm text-gray-500">
-                                            {stock.symbol} | {stock.exchange} | {stock.type}
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    )
-                }
-                <CommandGroup heading="Stocks">
-                    <CommandItem onSelect={handleSelectStock}>
-                        Sample Stock
-                    </CommandItem>
-                </CommandGroup>
-            </CommandList>
-        </CommandDialog>
+                    <div className="text-sm text-gray-500">
+                      {stock.symbol} | {stock.exchange} | {stock.type}
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </CommandList>
+      </CommandDialog>
     </>
   );
 }
