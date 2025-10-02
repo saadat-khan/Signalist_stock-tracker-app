@@ -7,9 +7,10 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatTimeAgo = (timestamp: number) => {
   const now = Date.now();
-  const diffInMs = now - timestamp * 1000; // Convert to milliseconds
-  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+  const diffInMs = Math.max(0, now - timestamp * 1000);
   const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+  if (diffInMinutes < 1) return 'Just now';
+  const diffInHours = Math.floor(diffInMinutes / 60);
 
   if (diffInHours > 24) {
     const days = Math.floor(diffInHours / 24);
@@ -21,6 +22,7 @@ export const formatTimeAgo = (timestamp: number) => {
   else {
     return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
   }
+}
 };
 
 export function delay(ms: number) {
