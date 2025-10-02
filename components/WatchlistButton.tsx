@@ -12,7 +12,6 @@ interface WatchlistButtonProps {
     company: string;
     userEmail: string;
     initialIsInWatchlist?: boolean;
-    showTrashIcon?: boolean;
     type?: 'button' | 'icon';
     onWatchlistChange?: (symbol: string, isAdded: boolean) => void;
 }
@@ -69,6 +68,7 @@ const WatchlistButton = ({
                     isInWatchlist ? 'text-yellow-500 hover:text-yellow-600' : 'text-gray-400 hover:text-yellow-500'
                 )}
                 title={isInWatchlist ? 'Remove from watchlist' : 'Add to watchlist'}
+                aria-pressed={isInWatchlist}
             >
                 <Star
                     className={cn(
@@ -91,6 +91,7 @@ const WatchlistButton = ({
                     ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-500 hover:bg-yellow-500/20'
                     : 'bg-blue-600 hover:bg-blue-700 text-white'
             )}
+            aria-pressed={isInWatchlist}
         >
             <Star
                 className={cn(

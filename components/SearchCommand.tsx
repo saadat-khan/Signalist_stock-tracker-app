@@ -43,7 +43,7 @@ export default function SearchCommand(
     return () => document.removeEventListener("keydown", down);
   }, []);
 
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     if (!isSearchMode) return setStocks(initialStocks);
 
     setLoading(true);
@@ -60,7 +60,7 @@ export default function SearchCommand(
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchTerm, initialStocks]);
 
   const debouncedSearch = useDebounce(handleSearch, 300);
 
