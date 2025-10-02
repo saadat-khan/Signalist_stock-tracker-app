@@ -118,11 +118,6 @@ export default function SearchCommand({ renderAs = 'button', label = "Add stock"
                         </ul>
                     )
                 }
-                <CommandGroup heading="Stocks">
-                    <CommandItem onSelect={handleSelectStock}>
-                        Sample Stock
-                    </CommandItem>
-                </CommandGroup>
             </CommandList>
         </CommandDialog>
     </>
