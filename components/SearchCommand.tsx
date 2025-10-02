@@ -124,7 +124,11 @@ export default function SearchCommand(
                                     <Link
                                         href={`/stocks/${stock.symbol}`}
                                         onClick={handleSelectStock}
-                                        className="search-tiem-link"
+                                     <Link
+                                         href={`/stocks/${stock.symbol}`}
+                                         onClick={handleSelectStock}
+                                         className="search-item-link"
+                                     >
                                     >
                                         <TrendingUp className="h-4 w-4 text-gray-500" />
                                         <div className="flex-1">
