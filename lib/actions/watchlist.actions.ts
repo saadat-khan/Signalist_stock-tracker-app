@@ -68,13 +68,20 @@ export async function addToWatchlist(email: string, symbol: string, company: str
         }
 
         // Add to watchlist with enriched data
-        await Watchlist.create({
+        try {
+          await Watchlist.create({
             userId,
             symbol: symbol.toUpperCase(),
             company: company.trim(),
             logoUrl: finalLogoUrl,
             officialName: finalOfficialName,
-        });
+          });
+        } catch (e: any) {
+          if (e.code === 11000) {
+            return { success: false, message: 'Stock is already in your watchlist' };
+          }
+          throw e;
+        }
 
         return { success: true, message: 'Added to watchlist successfully' };
     }
