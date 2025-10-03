@@ -62,7 +62,7 @@ export const sendNewsSummaryEmail = async ({ email, date, newsContent }: NewsSum
 export const testEmailConfiguration = async () => {
     try {
         console.log('Testing email configuration...');
-        console.log('Email:', process.env.NODEMAILER_EMAIL);
+        console.log('Email configured:', !!process.env.NODEMAILER_EMAIL);
         console.log('Password configured:', !!process.env.NODEMAILER_PASSWORD);
         
         // Verify transporter configuration
