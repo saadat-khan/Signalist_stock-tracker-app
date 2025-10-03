@@ -24,12 +24,13 @@ export const sendWelcomeEmail = async ({ email, name, intro }: WelcomeEmailData)
             html: htmlTemplate,
         }
         
-        console.log(`Sending welcome email to: ${email}`);
+        console.log('Sending welcome email');
         const result = await transporter.sendMail(mailOptions);
-        console.log(`Welcome email sent successfully to ${email}:`, result.messageId);
+        console.log('Welcome email sent successfully:', result.messageId);
         return { success: true, messageId: result.messageId };
     } catch (error) {
-        console.error(`Failed to send welcome email to ${email}:`, error);
+        console.error('Failed to send welcome email:', error);
+        throw error;
         throw error;
     }
 }
