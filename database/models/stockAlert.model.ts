@@ -31,12 +31,18 @@ const StockAlertSchema = new Schema<StockAlert>(
                 required: true,
                 enum: ['price_above', 'price_below', 'rsi_oversold', 'rsi_overbought', 'volume_spike', 'moving_average_cross']
             },
-            value: { type: Number },
+            value: { 
+                type: Number,
+                required(this: StockAlert) {
+                    return ['price_above', 'price_below'].includes(this.condition?.type);
+                }
+            },
             timeframe: { 
                 type: String, 
                 enum: ['1D', '5D', '1M', '3M'],
                 default: '1D'
             }
+        }
         },
         isActive: { type: Boolean, default: true },
         triggeredAt: { type: Date },
