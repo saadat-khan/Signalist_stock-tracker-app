@@ -42,7 +42,6 @@ const StockAlertSchema = new Schema<StockAlert>(
                 enum: ['1D', '5D', '1M', '3M'],
                 default: '1D'
             }
-        }
         },
         isActive: { type: Boolean, default: true },
         triggeredAt: { type: Date },

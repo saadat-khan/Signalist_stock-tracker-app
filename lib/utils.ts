@@ -22,7 +22,6 @@ export const formatTimeAgo = (timestamp: number) => {
   else {
     return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
   }
-}
 };
 
 export function delay(ms: number) {
