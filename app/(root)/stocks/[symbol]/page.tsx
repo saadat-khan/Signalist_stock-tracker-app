@@ -1,6 +1,7 @@
 import { headers } from 'next/headers';
 import { auth } from '@/lib/better-auth/auth';
 import { isInWatchlist } from '@/lib/actions/watchlist.actions';
+import { getCompanyProfile } from '@/lib/actions/finnhub.actions';
 import TradingViewWidget from '@/components/TradingViewWidget';
 import WatchlistButton from '@/components/WatchlistButton';
 import {
@@ -32,8 +33,11 @@ const StockDetails = async ({ params }: StockDetailsProps) => {
         userIsInWatchlist = await isInWatchlist(session.user.email, symbolUpper);
     }
 
-    // For now, we'll use the symbol as company name - in a real app you'd fetch this from an API
-    const companyName = symbolUpper;
+    // Get company profile data
+    const companyProfile = await getCompanyProfile(symbolUpper);
+    const companyName = companyProfile?.name || symbolUpper;
+    const logoUrl = companyProfile?.logo;
+    const officialName = companyProfile?.name;
 
     return (
         <div className="min-h-screen bg-gray-900 text-white">
@@ -51,6 +55,8 @@ const StockDetails = async ({ params }: StockDetailsProps) => {
                                     symbol={symbolUpper}
                                     company={companyName}
                                     userEmail={session.user.email}
+                                    logoUrl={logoUrl}
+                                    officialName={officialName}
                                     initialIsInWatchlist={userIsInWatchlist}
                                 />
                             </div>

@@ -84,6 +84,8 @@ declare global {
         name: string;
         exchange: string;
         type: string;
+        logoUrl?: string | null;
+        officialName?: string;
     };
 
     type StockWithWatchlistStatus = Stock & {

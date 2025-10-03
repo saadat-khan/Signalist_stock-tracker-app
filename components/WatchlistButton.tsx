@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { Star } from 'lucide-react';
+import { Star, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { addToWatchlist, removeFromWatchlist } from '@/lib/actions/watchlist.actions';
 import { toast } from 'sonner';
@@ -11,6 +11,8 @@ interface WatchlistButtonProps {
     symbol: string;
     company: string;
     userEmail: string;
+    logoUrl?: string | null;
+    officialName?: string;
     initialIsInWatchlist?: boolean;
     type?: 'button' | 'icon';
     onWatchlistChange?: (symbol: string, isAdded: boolean) => void;
@@ -20,6 +22,8 @@ const WatchlistButton = ({
     symbol,
     company,
     userEmail,
+    logoUrl,
+    officialName,
     initialIsInWatchlist = false,
     type = 'button',
     onWatchlistChange,
@@ -39,15 +43,21 @@ const WatchlistButton = ({
                 if (isInWatchlist) {
                     result = await removeFromWatchlist(userEmail, symbol);
                 } else {
-                    result = await addToWatchlist(userEmail, symbol, company);
+                    result = await addToWatchlist(
+                        userEmail,
+                        symbol,
+                        company,
+                        logoUrl,
+                        officialName,
+                    );
                 }
 
-                if (result.success) {
+                if (result?.success) {
                     setIsInWatchlist(!isInWatchlist);
                     onWatchlistChange?.(symbol, !isInWatchlist);
                     toast.success(result.message);
                 } else {
-                    toast.error(result.message);
+                    toast.error(result?.message || 'Operation failed');
                 }
             } catch (error) {
                 console.error('Watchlist toggle error:', error);
@@ -70,12 +80,16 @@ const WatchlistButton = ({
                 title={isInWatchlist ? 'Remove from watchlist' : 'Add to watchlist'}
                 aria-pressed={isInWatchlist}
             >
-                <Star
-                    className={cn(
-                        'h-4 w-4 transition-all',
-                        isInWatchlist && 'fill-current'
-                    )}
-                />
+                {isInWatchlist ? (
+                    <Trash2 className="h-4 w-4 transition-all" />
+                ) : (
+                    <Star
+                        className={cn(
+                            'h-4 w-4 transition-all',
+                            isInWatchlist && 'fill-current'
+                        )}
+                    />
+                )}
             </Button>
         );
     }

@@ -5,6 +5,7 @@ import {getAllUsersForNewEmail} from "@/lib/actions/user.actions";
 import {getWatchlistSymbolsByEmail} from "@/lib/actions/watchlist.actions";
 import {getNews} from "@/lib/actions/finnhub.actions";
 import {formatDateToday} from "@/lib/utils";
+import {getAllActiveAlerts} from "@/lib/actions/alert.actions";
 
 export const sendSignUpEmail = inngest.createFunction(
     { id: 'sign-up-email' },
@@ -129,6 +130,153 @@ export const sendDailyNewsSummary = inngest.createFunction(
         return {
             success: true,
             message: `Daily news summary processed for ${users.length} users`
+        };
+    }
+)
+
+export const checkStockAlerts = inngest.createFunction(
+    { id: 'check-stock-alerts' },
+    [ { cron: '*/15 * * * *' } ], // Check every 15 minutes during market hours
+    async ({ step }) => {
+        // Step 1: Get all active alerts
+        const alerts = await step.run("get-active-alerts", async () => {
+            return await getAllActiveAlerts();
+        });
+
+        if (!alerts || alerts.length === 0) {
+            return { success: true, message: 'No active alerts to check.' };
+        }
+
+        // Step 2: Group alerts by symbol for efficient API calls
+        type Alert = {
+            symbol: string;
+            condition: {
+                type: string;
+                value?: number;
+            };
+            userId: string;
+            // Add other properties as needed
+        };
+        const symbolGroups: Record<string, Alert[]> = {};
+        (alerts as Alert[]).forEach((alert: Alert) => {
+            if (!symbolGroups[alert.symbol]) {
+                symbolGroups[alert.symbol] = [];
+            }
+            symbolGroups[alert.symbol].push(alert);
+        });
+
+        const triggeredAlerts: Array<{
+            alert: typeof alerts[0];
+            message: string;
+            symbol: string;
+            marketData: any;
+        }> = [];
+
+        // Step 3: Check each symbol's conditions
+        for (const symbol of Object.keys(symbolGroups)) {
+            const symbolAlerts = symbolGroups[symbol];
+            
+            await step.run(`check-${symbol}`, async () => {
+                try {
+                    // Here you would fetch real market data from your API
+                    // For now, we'll use mock data to demonstrate the logic
+                    const mockMarketData = {
+                        price: 150 + (Math.random() - 0.5) * 20, // Random price around 150
+                        rsi: Math.random() * 100, // Random RSI
+                        volume: Math.random() * 1000000,
+                        previousVolume: Math.random() * 800000
+                    };
+
+                    for (const alert of symbolAlerts) {
+                        let shouldTrigger = false;
+                        let alertMessage = '';
+
+                        switch (alert.condition.type) {
+                            case 'rsi_oversold':
+                                if (mockMarketData.rsi < 30) {
+                                    shouldTrigger = true;
+                                    alertMessage = `${symbol} is oversold (RSI: ${mockMarketData.rsi.toFixed(2)}) - Consider buying!`;
+                                }
+                                break;
+                            case 'rsi_overbought':
+                                if (mockMarketData.rsi > 70) {
+                                    shouldTrigger = true;
+                                    alertMessage = `${symbol} is overbought (RSI: ${mockMarketData.rsi.toFixed(2)}) - Consider selling!`;
+                                }
+                                break;
+                            case 'price_above':
+                                if (alert.condition.value && mockMarketData.price > alert.condition.value) {
+                                    shouldTrigger = true;
+                                    alertMessage = `${symbol} price ($${mockMarketData.price.toFixed(2)}) is above your target of $${alert.condition.value}`;
+                                }
+                                break;
+                            case 'price_below':
+                                if (alert.condition.value && mockMarketData.price < alert.condition.value) {
+                                    shouldTrigger = true;
+                                    alertMessage = `${symbol} price ($${mockMarketData.price.toFixed(2)}) is below your target of $${alert.condition.value}`;
+                                }
+                                break;
+                            case 'volume_spike':
+                                const volumeIncrease = mockMarketData.volume / mockMarketData.previousVolume;
+                                if (volumeIncrease > 2) {
+                                    shouldTrigger = true;
+                                    alertMessage = `${symbol} has unusual volume activity (${volumeIncrease.toFixed(1)}x increase)`;
+                                }
+                                break;
+                        }
+
+                        if (shouldTrigger) {
+                            triggeredAlerts.push({
+                                alert,
+                                message: alertMessage,
+                                symbol,
+                                marketData: mockMarketData
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.error(`Error checking alerts for ${symbol}:`, error);
+                }
+            });
+        }
+
+        // Step 4: Send alert emails for triggered alerts
+        if (triggeredAlerts.length > 0) {
+            await step.run("send-alert-emails", async () => {
+                // Group by user to send consolidated emails
+                const userAlerts = triggeredAlerts.reduce((acc, { alert, message }) => {
+                    const typedAlert = alert as Alert;
+                    if (!acc[typedAlert.userId]) {
+                        acc[typedAlert.userId] = [];
+                    }
+                    acc[typedAlert.userId].push(message);
+                    return acc;
+                }, {} as Record<string, string[]>);
+
+                // Get user emails and send alerts
+                for (const userId of Object.keys(userAlerts)) {
+                    try {
+                        // Here you would get user email from userId
+                        // For demo, we'll just log the alerts
+                        console.log(`Alerts for user ${userId}:`, userAlerts[userId]);
+                        
+                        // TODO: Send actual email using your email service
+                        // await sendAlertEmail({
+                        //     email: userEmail,
+                        //     alerts: userAlerts[userId]
+                        // });
+                    } catch (error) {
+                        console.error(`Failed to send alert email to user ${userId}:`, error);
+                    }
+                }
+
+                return { emailsSent: Object.keys(userAlerts).length };
+            });
+        }
+
+        return {
+            success: true,
+            message: `Checked ${alerts.length} alerts, triggered ${triggeredAlerts.length} notifications`
         };
     }
 )
