@@ -217,11 +217,16 @@ export const checkStockAlerts = inngest.createFunction(
                                 }
                                 break;
                             case 'volume_spike':
-                                const volumeIncrease = mockMarketData.volume / mockMarketData.previousVolume;
+                            case 'volume_spike': {
+                                const baseVolume = mockMarketData.previousVolume || 0;
+                                if (baseVolume === 0) break;
+                                const volumeIncrease = mockMarketData.volume / baseVolume;
                                 if (volumeIncrease > 2) {
                                     shouldTrigger = true;
                                     alertMessage = `${symbol} has unusual volume activity (${volumeIncrease.toFixed(1)}x increase)`;
                                 }
+                                break;
+                            }
                                 break;
                         }
 
