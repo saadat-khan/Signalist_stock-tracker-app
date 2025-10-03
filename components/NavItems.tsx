@@ -4,7 +4,7 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import SearchCommand from "./SearchCommand";
 
-const NavItems = ({ initialStocks }: { initialStocks: StockWithWatchlistStatus[]}) => {
+const NavItems = ({ initialStocks, user }: { initialStocks: StockWithWatchlistStatus[], user?: { id: string; email: string; name: string } }) => {
     const pathname = usePathname()
 
     const isActive = (path: string) => {
@@ -21,6 +21,7 @@ const NavItems = ({ initialStocks }: { initialStocks: StockWithWatchlistStatus[]
                         renderAs="text"
                         label="Search"
                         initialStocks={initialStocks}
+                        user={user}
                     />
                 </li>
               )

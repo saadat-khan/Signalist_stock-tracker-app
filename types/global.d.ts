@@ -84,6 +84,8 @@ declare global {
         name: string;
         exchange: string;
         type: string;
+        logoUrl?: string | null;
+        officialName?: string;
     };
 
     type StockWithWatchlistStatus = Stock & {
@@ -112,7 +114,6 @@ declare global {
         symbol: string;
         company: string;
         isInWatchlist: boolean;
-        showTrashIcon?: boolean;
         type?: 'button' | 'icon';
         onWatchlistChange?: (symbol: string, isAdded: boolean) => void;
     };

@@ -1,7 +1,8 @@
 'use server';
 
 import { connectToDatabase } from '@/database/mongoose';
-import { Watchlist } from '@/database/models/watchlist.model';
+import { Watchlist, type WatchlistItem } from '@/database/models/watchlist.model';
+import { getCompanyProfile } from '@/lib/actions/finnhub.actions';
 
 export async function getWatchlistSymbolsByEmail(email: string): Promise<string[]> {
     if (!email) return [];
@@ -28,7 +29,7 @@ export async function getWatchlistSymbolsByEmail(email: string): Promise<string[
     }
 }
 
-export async function addToWatchlist(email: string, symbol: string, company: string): Promise<{ success: boolean; message: string }> {
+export async function addToWatchlist(email: string, symbol: string, company: string, logoUrl?: string | null, officialName?: string): Promise<{ success: boolean; message: string }> {
     if (!email || !symbol || !company) {
         return { success: false, message: 'Missing required parameters' };
     }
@@ -56,12 +57,31 @@ export async function addToWatchlist(email: string, symbol: string, company: str
             return { success: false, message: 'Stock is already in your watchlist' };
         }
 
-        // Add to watchlist
-        await Watchlist.create({
+        // Use provided logo/name or fetch from API as fallback
+        let finalLogoUrl = logoUrl;
+        let finalOfficialName = officialName;
+        
+        if (!finalLogoUrl || !finalOfficialName) {
+            const companyProfile = await getCompanyProfile(symbol);
+            finalLogoUrl = logoUrl || companyProfile.logo;
+            finalOfficialName = officialName || companyProfile.name;
+        }
+
+        // Add to watchlist with enriched data
+        try {
+          await Watchlist.create({
             userId,
             symbol: symbol.toUpperCase(),
             company: company.trim(),
-        });
+            logoUrl: finalLogoUrl,
+            officialName: finalOfficialName,
+          });
+        } catch (e: any) {
+          if (e.code === 11000) {
+            return { success: false, message: 'Stock is already in your watchlist' };
+          }
+          throw e;
+        }
 
         return { success: true, message: 'Added to watchlist successfully' };
     }
@@ -130,5 +150,30 @@ export async function isInWatchlist(email: string, symbol: string): Promise<bool
     catch (err) {
         console.error('isInWatchlist error:', err);
         return false;
+    }
+}
+
+export async function getFullWatchlist(email: string): Promise<WatchlistItem[]> {
+    if (!email) return [];
+
+    try {
+        const mongoose = await connectToDatabase();
+        const db = mongoose.connection.db;
+        if (!db) throw new Error('MongoDB connection not found');
+
+        // Better Auth stores users in the "user" collection
+        const user = await db.collection('user').findOne<{ _id?: unknown; id?: string; email?: string }>({ email });
+
+        if (!user) return [];
+
+        const userId = (user.id as string) || String(user._id || '');
+        if (!userId) return [];
+
+        const watchlistItems = await Watchlist.find({ userId }).sort({ addedAt: -1 }).lean();
+        return watchlistItems;
+    }
+    catch (err) {
+        console.error('getFullWatchlist error:', err);
+        return [];
     }
 }
