@@ -116,15 +116,22 @@ export const sendDailyNewsSummary = inngest.createFunction(
 
         // Step 4: Placeholder for sending emails
         await step.run("send-news-emails", async () => {
-            await Promise.all(
+            const results = await Promise.all(
                 userNewsSummaries.map(async ({ user, newsContent }) => {
-                    if (!newsContent) return false;
+                    if (!newsContent) return null;
 
-                    return await sendNewsSummaryEmail({ email: user.email, date: formatDateToday, newsContent });
+                    try {
+                        await sendNewsSummaryEmail({ email: user.email, date: formatDateToday, newsContent });
+                        return true;
+                    } catch (error) {
+                        console.error(`Failed to send email to ${user.email}:`, error);
+                        return null;
+                    }
                 })
-            )
-            console.log("Email sending placeholder");
-            return { emailsSent: users.length };
+            );
+            const emailsSent = results.filter(r => r === true).length;
+            console.log(`Successfully sent ${emailsSent} emails`);
+            return { emailsSent };
         });
 
         return {

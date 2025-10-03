@@ -7,9 +7,10 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatTimeAgo = (timestamp: number) => {
   const now = Date.now();
-  const diffInMs = now - timestamp * 1000; // Convert to milliseconds
-  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+  const diffInMs = Math.max(0, now - timestamp * 1000);
   const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+  if (diffInMinutes < 1) return 'Just now';
+  const diffInHours = Math.floor(diffInMinutes / 60);
 
   if (diffInHours > 24) {
     const days = Math.floor(diffInHours / 24);
@@ -21,6 +22,7 @@ export const formatTimeAgo = (timestamp: number) => {
   else {
     return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
   }
+}
 };
 
 export function delay(ms: number) {
@@ -100,7 +102,7 @@ export const formatArticle = (
 });
 
 export const formatChangePercent = (changePercent?: number) => {
-  if (!changePercent) return '';
+  if (changePercent === undefined || changePercent === null) return '';
   const sign = changePercent > 0 ? '+' : '';
   return `${sign}${changePercent.toFixed(2)}%`;
 };
@@ -118,13 +120,14 @@ export const formatPrice = (price: number) => {
   }).format(price);
 };
 
-export const formatDateToday = new Date().toLocaleDateString('en-US', {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'UTC',
-});
+export const formatDateToday = () =>
+  new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
 
 
 export const getAlertText = (alert: Alert) => {

@@ -14,14 +14,15 @@ import {
 } from '@/lib/constants';
 
 interface StockDetailsProps {
-    params: Promise<{
-        symbol: string;
-    }>;
+  params: {
+    symbol: string;
+  };
 }
 
 const StockDetails = async ({ params }: StockDetailsProps) => {
-    const { symbol } = await params;
+    const { symbol } = params;
     const symbolUpper = symbol.toUpperCase();
+    // …
     
     // Get user session
     const authInstance = await auth;

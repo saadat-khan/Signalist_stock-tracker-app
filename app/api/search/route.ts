@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     const query = searchParams.get('q') || '';
 
     // Validate API key server-side by checking if it's available
-    const finnhubKey = process.env.FINNHUB_API_KEY || process.env.NEXT_PUBLIC_FINNHUB_API_KEY;
+    const finnhubKey = process.env.FINNHUB_API_KEY;
     if (!finnhubKey) {
       return NextResponse.json(
         { error: 'API configuration error' },
