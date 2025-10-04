@@ -168,7 +168,7 @@ Use the admin dashboard to manage stocks, publish news, and track users.
 
 We welcome contributions! 🎉
 Please fork the repo and submit a pull request.
-Before contributing, check out the guidelines in CONTRIBUTING.md.
+Before contributing, check out the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
