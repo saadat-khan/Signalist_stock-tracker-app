@@ -1,6 +1,6 @@
 <div align="center">
   <br />
-    <img src="public/readme/signalist-banner.svg" alt="Signalist Banner" width="100%">
+    <img src="https://raw.githubusercontent.com/saadat-khan/Signalist_stock-tracker-app/cfec8288fdcc99d5ff68f5745a694f860298f2cf/Banner.svg" width="100%">
   <br />
 
   <div>
