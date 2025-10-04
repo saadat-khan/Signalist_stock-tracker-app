@@ -1,93 +1,86 @@
 <div align="center">
   <br />
-    <a href="https://youtu.be/gu4pafNCXng" target="_blank">
-      <img src="public/readme/hero.webp" alt="Project Banner">
-    </a>
+    <img src="public/readme/signalist-banner.svg" alt="Signalist Banner" width="100%">
   <br />
 
   <div>
-    <img src="https://img.shields.io/badge/-Next.js-black?style=for-the-badge&logoColor=white&logo=next.js&color=black"/>
-    <img src="https://img.shields.io/badge/-Better Auth-black?style=for-the-badge&logoColor=white&logo=betterauth&color=black"/>
-<img src="https://img.shields.io/badge/-Shadcn-black?style=for-the-badge&logoColor=white&logo=shadcnui&color=black"/>
-<img src="https://img.shields.io/badge/-Inngest-black?style=for-the-badge&logoColor=white&logo=inngest&color=black"/><br/>
-
-<img src="https://img.shields.io/badge/-MongoDB-black?style=for-the-badge&logoColor=white&logo=mongodb&color=00A35C"/>
-<img src="https://img.shields.io/badge/-CodeRabbit-black?style=for-the-badge&logoColor=white&logo=coderabbit&color=9146FF"/>
-<img src="https://img.shields.io/badge/-TailwindCSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=38B2AC"/>
-<img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6"/>
-
+    <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+    <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+    <img src="https://img.shields.io/badge/Shadcn-18181B?style=for-the-badge&logo=react&logoColor=white" />
+    <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+    <img src="https://img.shields.io/badge/Inngest-4C51BF?style=for-the-badge&logo=serverless&logoColor=white" />
+    <img src="https://img.shields.io/badge/Better%20Auth-1A73E8?style=for-the-badge&logo=auth0&logoColor=white" />
+    <img src="https://img.shields.io/badge/Finnhub-0C7D5B?style=for-the-badge&logo=databricks&logoColor=white" />
   </div>
 
-  <h3 align="center">Stock Market App — Alerts, Charts, AI Insights</h3>
-
-
+  <h3 align="center">🚀 Signalist – AI-Powered Stock Market App</h3>
+  <p align="center">Modern real-time financial platform with alerts, charts, watchlists, and AI insights</p>
 </div>
 
-## 📋 <a name="table">Table of Contents</a>
+---
 
-1. ✨ [Introduction](#introduction)
-2. ⚙️ [Tech Stack](#tech-stack)
-3. 🔋 [Features](#features)
-4. 🤸 [Quick Start](#quick-start)
+## 📋 Table of Contents
 
-## <a name="introduction">✨ Introduction</a>
+1. ✨ [Introduction](#introduction)  
+2. ⚙️ [Tech Stack](#tech-stack)  
+3. 🔋 [Features](#features)  
+4. 🤸 [Quick Start](#quick-start)  
+5. 📊 [Usage](#usage)  
+6. 🌍 [Roadmap](#roadmap)  
+7. 🤝 [Contributing](#contributing)  
+8. 🏆 [Acknowledgements](#acknowledgements)  
+9. 📜 [License](#license)  
 
-AI-powered modern stock market app built with Next.js, Shadcn, Better Auth, and Inngest! Track real-time prices, set personalized alerts, explore company insights, and manage watchlists. The admin dashboard allows managing stocks, publishing news, and monitoring user activity, while event-driven workflows power automated alerts, AI-driven daily digests, earnings notifications, and sentiment analysis—perfect for devs who want a dynamic, real-time financial platform.
+---
 
-## <a name="tech-stack">⚙️ Tech Stack</a>
+## ✨ Introduction
 
-- **[Better Auth](https://www.better-auth.com/)** is a framework-agnostic authentication and authorization library for TypeScript. It provides built-in support for email/password login, social sign-on (Google, GitHub, Apple, and more), and multi-factor authentication, simplifying user authentication and account management.
+**Signalist** is an **AI-powered stock market app** built with **Next.js, Shadcn, Better Auth, and Inngest**.  
+It provides real-time financial data, personalized alerts, watchlists, and AI-driven insights.  
+Admins can manage stocks, publish news, and monitor user activity, while **event-driven workflows** power automated alerts, daily digests, and sentiment analysis.  
 
-- **[CodeRabbit](https://jsm.dev/stocks-coderabbit)** is an AI-powered code review assistant that integrates with GitHub. It helps developers catch bugs, enforce best practices, and maintain consistent code quality across pull requests, reducing manual review effort and speeding up the development workflow.
+Whether you’re a **developer, trader, or data enthusiast**, Signalist delivers a dynamic, real-time financial platform.
 
+---
 
-- **[Finnhub](https://finnhub.io/)** is a real-time financial data API that provides stock, forex, and cryptocurrency market data. It offers developers access to fundamental data, economic indicators, and news, making it useful for building trading apps, dashboards, and financial analysis tools.
+## ⚙️ Tech Stack
 
-- **[Inngest](https://jsm.dev/stocks-inngest)** is a platform for event-driven workflows and background jobs. It allows developers to build reliable, scalable automated processes such as real-time alerts, notifications, and AI-powered workflows.
+- **[Next.js](https://nextjs.org/)** – Full-stack React framework with SSR/SSG support.  
+- **[TypeScript](https://www.typescriptlang.org/)** – Statically typed superset of JavaScript.  
+- **[TailwindCSS](https://tailwindcss.com/)** – Utility-first CSS framework.  
+- **[Shadcn](https://ui.shadcn.com/)** – Accessible React components for beautiful UI.  
+- **[Better Auth](https://better-auth.com/)** – Authentication & authorization with MFA + social login.  
+- **[Inngest](https://www.inngest.com/)** – Event-driven workflows and background jobs.  
+- **[MongoDB](https://www.mongodb.com/)** – NoSQL database for scalable data storage.  
+- **[Nodemailer](https://nodemailer.com/)** – Email delivery & notifications.  
+- **[Finnhub](https://finnhub.io/)** – Real-time market data API.  
+- **[CodeRabbit](https://coderabbit.ai/)** – AI-powered GitHub code review assistant.  
 
-- **[MongoDB](https://www.mongodb.com/)** is a flexible, high-performance NoSQL database. It stores data in JSON-like documents, supports dynamic schemas, and provides robust features for scalability, replication, and querying.
+---
 
-- **[Nodemailer](https://nodemailer.com/)** is a Node.js library for sending emails easily. It supports various transport methods such as SMTP, OAuth2, and third-party services, making it a reliable tool for handling transactional emails, notifications, and contact forms in applications.
+## 🔋 Features
 
-- **[Next.js](https://nextjs.org/docs)** is a powerful React framework for building full-stack web applications. It provides server-side rendering, static site generation, and API routes, allowing developers to create optimized and scalable apps quickly.
+👉 **Stock Dashboard** – Real-time prices with line/candlestick charts & historical data.  
+👉 **Powerful Search** – Intelligent stock search by industry, market cap, or performance.  
+👉 **Watchlist & Alerts** – Personalized watchlists with instant email alerts.  
+👉 **Company Insights** – PE ratio, EPS, revenue, analyst ratings, sentiment scores & filings.  
+👉 **Real-Time Workflows** – Automated price updates, scheduling & AI digests powered by Inngest.  
+👉 **AI Insights** – Personalized summaries, earnings notifications & daily reports.  
+👉 **Custom Notifications** – Fine-tuned alerts based on user preferences.  
+👉 **Analytics & Admin Dashboard** – Manage users, publish news, monitor activity.  
 
-- **[Shadcn](https://ui.shadcn.com/docs)** is an open-source library of fully customizable, accessible React components. It helps teams rapidly build consistent, visually appealing UIs while allowing full control over design and layout.
+---
 
-- **[TailwindCSS](https://tailwindcss.com/)** is a utility-first CSS framework that allows developers to build custom, responsive designs quickly without leaving their HTML. It provides pre-defined classes for layout, typography, colors, and more.
+## 🤸 Quick Start
 
-- **[TypeScript](https://www.typescriptlang.org/)** is a statically typed superset of JavaScript that improves code quality, tooling, and error detection. It is ideal for building large-scale applications and enhances maintainability.
+### Prerequisites
+Ensure you have installed:
+- [Node.js](https://nodejs.org/) (v18+ recommended)  
+- [Git](https://git-scm.com/)  
+- [MongoDB](https://www.mongodb.com/) instance  
 
-## <a name="features">🔋 Features</a>
-
-👉 **Stock Dashboard**: Track real-time stock prices with interactive line and candlestick charts, including historical data, and filter stocks by industry, performance, or market cap.
-
-👉 **Powerful Search**: Quickly find the best stocks with an intelligent search system that helps you navigate through Signalist.
-
-👉 **Watchlist & Alerts**: Create a personalized watchlist, set alert thresholds for price changes or volume spikes, and receive instant email notifications to stay on top of the market.
-
-👉 **Company Insights**: Explore detailed financial data such as PE ratio, EPS, revenue, recent news, filings, analyst ratings, and sentiment scores for informed decision-making.
-
-👉 **Real-Time Workflows**: Powered by **Inngest**, automate event-driven processes like price updates, alert scheduling, automated reporting, and AI-driven insights.
-
-👉 **AI-Powered Alerts & Summaries**: Generate personalized market summaries, daily digests, and earnings report notifications, helping users track performance and make data-driven decisions.
-
-👉 **Customizable Notifications**: Fine-tune alerts and notifications based on user watchlists and preferences for a highly personalized experience.
-
-👉 **Analytics & Insights**: Gain insights into user behavior, stock trends, and engagement metrics, enabling smarter business and trading decisions.
-
-And many more, including code architecture and reusability.
-
-## <a name="quick-start">🤸 Quick Start</a>
-
-Follow these steps to set up the project locally on your machine.
-
-**Prerequisites**
-
-Make sure you have the following installed on your machine:
-
-- [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com/) (Node Package Manager)
+### Installation
 
 **Cloning the Repository**
 
@@ -141,3 +134,47 @@ npx inngest-cli@latest dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
+
+---
+
+## 📊 Usage
+
+Sign up with Better Auth (email, Google, GitHub, etc.).
+
+Add stocks to your watchlist.
+
+Set alerts for price or volume changes.
+
+Explore company insights & AI summaries.
+
+Use the admin dashboard to manage stocks, publish news, and track users.
+
+---
+
+## 🌍 Roadmap
+
+📱 Mobile app version (React Native)
+
+🔔 Push notifications (Web + Mobile)
+
+📈 Portfolio tracking with performance metrics
+
+🤖 Advanced AI insights (trend predictions & risk analysis)
+
+🌐 Multi-language support
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! 🎉
+Please fork the repo and submit a pull request.
+Before contributing, check out the guidelines in CONTRIBUTING.md.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+See LICENSE
+ for more details.
