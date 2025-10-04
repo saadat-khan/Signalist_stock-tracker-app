@@ -28,9 +28,8 @@
 4. 🤸 [Quick Start](#quick-start)  
 5. 📊 [Usage](#usage)  
 6. 🌍 [Roadmap](#roadmap)  
-7. 🤝 [Contributing](#contributing)  
-8. 🏆 [Acknowledgements](#acknowledgements)  
-9. 📜 [License](#license)  
+7. 🤝 [Contributing](#contributing)
+8. 📜 [License](#license)  
 
 ---
 
@@ -44,7 +43,7 @@ Whether you’re a **developer, trader, or data enthusiast**, Signalist delivers
 
 ---
 
-## ⚙️ Tech Stack
+## <a name="tech-stack">⚙️ Tech Stack</a>
 
 - **[Next.js](https://nextjs.org/)** – Full-stack React framework with SSR/SSG support.  
 - **[TypeScript](https://www.typescriptlang.org/)** – Statically typed superset of JavaScript.  
@@ -59,7 +58,7 @@ Whether you’re a **developer, trader, or data enthusiast**, Signalist delivers
 
 ---
 
-## 🔋 Features
+## <a name="features">🔋 Features</a>
 
 👉 **Stock Dashboard** – Real-time prices with line/candlestick charts & historical data.  
 👉 **Powerful Search** – Intelligent stock search by industry, market cap, or performance.  
@@ -72,7 +71,7 @@ Whether you’re a **developer, trader, or data enthusiast**, Signalist delivers
 
 ---
 
-## 🤸 Quick Start
+## <a name="quick-start">🤸 Quick Start</a>
 
 ### Prerequisites
 Ensure you have installed:
@@ -137,7 +136,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ---
 
-## 📊 Usage
+## <a name="usage">📊 Usage</a>
 
 Sign up with Better Auth (email, Google, GitHub, etc.).
 
@@ -151,7 +150,7 @@ Use the admin dashboard to manage stocks, publish news, and track users.
 
 ---
 
-## 🌍 Roadmap
+## <a name="roadmap">🌍 Roadmap</a>
 
 📱 Mobile app version (React Native)
 
@@ -165,7 +164,7 @@ Use the admin dashboard to manage stocks, publish news, and track users.
 
 ---
 
-## 🤝 Contributing
+## <a name="contributing">🤝 Contributing</a>
 
 We welcome contributions! 🎉
 Please fork the repo and submit a pull request.
@@ -173,7 +172,7 @@ Before contributing, check out the guidelines in CONTRIBUTING.md.
 
 ---
 
-## 📜 License
+## <a name="license">📜 License</a>
 
 This project is licensed under the MIT License.
 See [LICENSE](LICENSE)
