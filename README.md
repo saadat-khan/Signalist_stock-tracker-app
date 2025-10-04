@@ -20,7 +20,7 @@
 
 ---
 
-## 📋 Table of Contents
+## 📋 <a name="table">Table of Contents</a>
 
 1. ✨ [Introduction](#introduction)  
 2. ⚙️ [Tech Stack](#tech-stack)  
@@ -34,7 +34,7 @@
 
 ---
 
-## ✨ Introduction
+## <a name="introduction">✨ Introduction</a>
 
 **Signalist** is an **AI-powered stock market app** built with **Next.js, Shadcn, Better Auth, and Inngest**.  
 It provides real-time financial data, personalized alerts, watchlists, and AI-driven insights.  
