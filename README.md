@@ -176,5 +176,5 @@ Before contributing, check out the guidelines in CONTRIBUTING.md.
 ## 📜 License
 
 This project is licensed under the MIT License.
-See LICENSE
+See [LICENSE](LICENSE)
  for more details.
