@@ -138,15 +138,15 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ## <a name="usage">📊 Usage</a>
 
-Sign up with Better Auth (email, Google, GitHub, etc.).
+- Sign up with Better Auth (email, Google, GitHub, etc.).
 
-Add stocks to your watchlist.
+- Add stocks to your watchlist.
 
-Set alerts for price or volume changes.
+- Set alerts for price or volume changes.
 
-Explore company insights & AI summaries.
+- Explore company insights & AI summaries.
 
-Use the admin dashboard to manage stocks, publish news, and track users.
+- Use the admin dashboard to manage stocks, publish news, and track users.
 
 ---
 
