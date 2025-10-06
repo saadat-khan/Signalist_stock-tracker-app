@@ -1,36 +1,179 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <br />
+    <img src="https://raw.githubusercontent.com/saadat-khan/Signalist_stock-tracker-app/cfec8288fdcc99d5ff68f5745a694f860298f2cf/Banner.svg" width="100%">
+  <br />
 
-## Getting Started
+  <div>
+    <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+    <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+    <img src="https://img.shields.io/badge/Shadcn-18181B?style=for-the-badge&logo=react&logoColor=white" />
+    <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+    <img src="https://img.shields.io/badge/Inngest-4C51BF?style=for-the-badge&logo=serverless&logoColor=white" />
+    <img src="https://img.shields.io/badge/Better%20Auth-1A73E8?style=for-the-badge&logo=auth0&logoColor=white" />
+    <img src="https://img.shields.io/badge/Finnhub-0C7D5B?style=for-the-badge&logo=databricks&logoColor=white" />
+  </div>
 
-First, run the development server:
+  <h3 align="center">🚀 Signalist – AI-Powered Stock Market App</h3>
+  <p align="center">Modern real-time financial platform with alerts, charts, watchlists, and AI insights</p>
+</div>
+
+---
+
+## 📋 <a name="table">Table of Contents</a>
+
+1. ✨ [Introduction](#introduction)  
+2. ⚙️ [Tech Stack](#tech-stack)  
+3. 🔋 [Features](#features)  
+4. 🤸 [Quick Start](#quick-start)  
+5. 📊 [Usage](#usage)  
+6. 🌍 [Roadmap](#roadmap)  
+7. 🤝 [Contributing](#contributing)
+8. 📜 [License](#license)  
+
+---
+
+## <a name="introduction">✨ Introduction</a>
+
+**Signalist** is an **AI-powered stock market app** built with **Next.js, Shadcn, Better Auth, and Inngest**.  
+It provides real-time financial data, personalized alerts, watchlists, and AI-driven insights.  
+Admins can manage stocks, publish news, and monitor user activity, while **event-driven workflows** power automated alerts, daily digests, and sentiment analysis.  
+
+Whether you’re a **developer, trader, or data enthusiast**, Signalist delivers a dynamic, real-time financial platform.
+
+---
+
+## <a name="tech-stack">⚙️ Tech Stack</a>
+
+- **[Next.js](https://nextjs.org/)** – Full-stack React framework with SSR/SSG support.  
+- **[TypeScript](https://www.typescriptlang.org/)** – Statically typed superset of JavaScript.  
+- **[TailwindCSS](https://tailwindcss.com/)** – Utility-first CSS framework.  
+- **[Shadcn](https://ui.shadcn.com/)** – Accessible React components for beautiful UI.  
+- **[Better Auth](https://better-auth.com/)** – Authentication & authorization with MFA + social login.  
+- **[Inngest](https://www.inngest.com/)** – Event-driven workflows and background jobs.  
+- **[MongoDB](https://www.mongodb.com/)** – NoSQL database for scalable data storage.  
+- **[Nodemailer](https://nodemailer.com/)** – Email delivery & notifications.  
+- **[Finnhub](https://finnhub.io/)** – Real-time market data API.  
+- **[CodeRabbit](https://coderabbit.ai/)** – AI-powered GitHub code review assistant.  
+
+---
+
+## <a name="features">🔋 Features</a>
+
+👉 **Stock Dashboard** – Real-time prices with line/candlestick charts & historical data.  
+👉 **Powerful Search** – Intelligent stock search by industry, market cap, or performance.  
+👉 **Watchlist & Alerts** – Personalized watchlists with instant email alerts.  
+👉 **Company Insights** – PE ratio, EPS, revenue, analyst ratings, sentiment scores & filings.  
+👉 **Real-Time Workflows** – Automated price updates, scheduling & AI digests powered by Inngest.  
+👉 **AI Insights** – Personalized summaries, earnings notifications & daily reports.  
+👉 **Custom Notifications** – Fine-tuned alerts based on user preferences.  
+👉 **Analytics & Admin Dashboard** – Manage users, publish news, monitor activity.  
+
+---
+
+## <a name="quick-start">🤸 Quick Start</a>
+
+### Prerequisites
+Ensure you have installed:
+- [Node.js](https://nodejs.org/) (v18+ recommended)  
+- [Git](https://git-scm.com/)  
+- [MongoDB](https://www.mongodb.com/) instance  
+
+### Installation
+
+**Cloning the Repository**
+
+```bash
+git clone https://github.com/saadat-khan/Signalist_stock-tracker-app.git
+cd Signalist_stock-tracker-app
+```
+
+**Installation**
+
+Install the project dependencies using npm:
+
+```bash
+npm install
+```
+
+**Set Up Environment Variables**
+
+Create a new file named `.env` in the root of your project and add the following content:
+
+```env
+NODE_ENV='development'
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# FINNHUB
+NEXT_PUBLIC_NEXT_PUBLIC_FINNHUB_API_KEY=
+FINNHUB_BASE_URL=https://finnhub.io/api/v1
+
+# MONGODB
+MONGODB_URI=
+
+# BETTER AUTH
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
+
+# GEMINI
+GEMINI_API_KEY=
+
+#NODEMAILER
+NODEMAILER_EMAIL=
+NODEMAILER_PASSWORD=
+```
+
+Replace the placeholder values with your real credentials. You can get these by signing up at: [**MongoDB**](https://www.mongodb.com/products/platform/atlas-database), [**Gemini**](https://aistudio.google.com/prompts/new_chat?utm_source=chatgpt.com), [**Inngest**](https://jsm.dev/stocks-inggest), [**Finnhub**](https://finnhub.io).
+
+**Running the Project**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx inngest-cli@latest dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## <a name="usage">📊 Usage</a>
 
-## Learn More
+- Sign up with Better Auth (email, Google, GitHub, etc.).
 
-To learn more about Next.js, take a look at the following resources:
+- Add stocks to your watchlist.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Set alerts for price or volume changes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Explore company insights & AI summaries.
 
-## Deploy on Vercel
+- Use the admin dashboard to manage stocks, publish news, and track users.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## <a name="roadmap">🌍 Roadmap</a>
+
+📱 Mobile app version (React Native)
+
+🔔 Push notifications (Web + Mobile)
+
+📈 Portfolio tracking with performance metrics
+
+🤖 Advanced AI insights (trend predictions & risk analysis)
+
+🌐 Multi-language support
+
+---
+
+## <a name="contributing">🤝 Contributing</a>
+
+We welcome contributions! 🎉
+Please fork the repo and submit a pull request.
+Before contributing, check out the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+## <a name="license">📜 License</a>
+
+This project is licensed under the MIT License.
+See [LICENSE](LICENSE)
+ for more details.
