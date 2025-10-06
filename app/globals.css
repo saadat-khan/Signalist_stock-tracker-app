@@ -487,3 +487,36 @@
 .scrollbar-hide-default::-webkit-scrollbar-thumb:hover {
     background-color: #9095A1;
 }
+
+/* Horizontal scroll container with smooth scrolling */
+.horizontal-scroll-container {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    scroll-behavior: smooth;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.horizontal-scroll-container:hover {
+    scrollbar-color: #4b5563 transparent;
+}
+
+.horizontal-scroll-container:hover::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #6b7280;
+}
