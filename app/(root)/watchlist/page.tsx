@@ -11,6 +11,7 @@ import WatchlistButton from "@/components/WatchlistButton";
 import WatchlistHeader from "@/components/WatchlistHeader";
 import CreateAlertDialog from "@/components/CreateAlertDialog";
 import CompanyLogo from "@/components/CompanyLogo";
+import ScrollableAlerts from "@/components/ScrollableAlerts";
 
 interface WatchlistStock {
   symbol: string;
@@ -61,39 +62,10 @@ export default async function WatchlistPage() {
 
       {/* Alerts Section */}
       {watchlistWithPrices.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {watchlistWithPrices.slice(0, 4).map((stock) => (
-            <div key={`alert-${stock.symbol}`} className="bg-gray-800 rounded-lg p-4 border border-gray-700">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <CompanyLogo 
-                    logoUrl={stock.logoUrl}
-                    symbol={stock.symbol}
-                    companyName={stock.officialName || stock.company}
-                    size="md"
-                  />
-                  <span className="text-white font-medium">{stock.symbol}</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <WatchlistButton 
-                    symbol={stock.symbol} 
-                    company={stock.company} 
-                    userEmail={user.email}
-                    logoUrl={stock.logoUrl}
-                    officialName={stock.officialName}
-                    initialIsInWatchlist={true}
-                    type="icon"
-                  />
-                </div>
-              </div>
-              <div className="text-sm text-gray-400 mb-1">Alert:</div>
-              <div className="text-white font-semibold">${stock.price?.toFixed(2)}</div>
-              <div className={`text-sm ${stock.changePercent! > 0 ? 'text-green-400' : 'text-red-400'}`}>
-                {stock.changePercent! > 0 ? '+' : ''}{stock.changePercent?.toFixed(2)}%
-              </div>
-            </div>
-          ))}
-        </div>
+        <ScrollableAlerts 
+          watchlistStocks={watchlistWithPrices} 
+          userEmail={user.email}
+        />
       )}
 
       {/* Watchlist Table */}

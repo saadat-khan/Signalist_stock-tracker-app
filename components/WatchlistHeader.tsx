@@ -14,8 +14,8 @@ interface WatchlistHeaderProps {
 export default function WatchlistHeader({ user, initialStocks }: WatchlistHeaderProps) {
   const [triggerSearch, setTriggerSearch] = useState(false);
 
-  const handleAddStock = () => {
-    setTriggerSearch(true);
+  const handleAddStock = async () => {
+    setStocks(initialStocks);
   };
 
   const handleSearchOpenChange = () => {
@@ -56,4 +56,8 @@ export default function WatchlistHeader({ user, initialStocks }: WatchlistHeader
       </div>
     </>
   );
+}
+
+function setStocks(initialStocks: StockWithWatchlistStatus[]) {
+  throw new Error("Function not implemented.");
 }
